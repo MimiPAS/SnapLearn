@@ -13,7 +13,9 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -21,20 +23,39 @@
             padding: 20px;
         }
 
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 900px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.3);
+            max-width: 950px;
             width: 100%;
-            padding: 40px;
+            padding: 45px;
+            border: 3px solid rgba(255, 255, 255, 0.5);
         }
 
         h1 {
             text-align: center;
-            color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 10px;
-            font-size: 2.5em;
+            font-size: 2.8em;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         .subtitle {
@@ -61,13 +82,15 @@
         }
 
         .mode-btn.teacher {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%);
             color: white;
+            box-shadow: 0 5px 15px rgba(252, 92, 125, 0.4);
         }
 
         .mode-btn.student {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #0cebeb 0%, #20e3b2 50%, #29ffc6 100%);
             color: white;
+            box-shadow: 0 5px 15px rgba(12, 235, 235, 0.4);
         }
 
         .mode-btn:hover {
@@ -78,6 +101,12 @@
         .mode-btn.active {
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transform: scale(1.05);
+            animation: btnGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes btnGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.5); }
         }
 
         .category-selector {
@@ -88,26 +117,35 @@
         }
 
         .category-btn {
-            padding: 15px;
-            border: 2px solid #667eea;
-            background: white;
-            border-radius: 10px;
+            padding: 18px;
+            border: 3px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #667eea, #764ba2, #f093fb) border-box;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 1em;
+            font-size: 1.05em;
+            font-weight: 700;
             color: #667eea;
-            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .category-btn:hover {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
 
         .category-btn.active {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            animation: categoryPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes categoryPulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6); }
         }
 
         .flashcard-container {
@@ -143,14 +181,16 @@
         }
 
         .card-front {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             color: white;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
         }
 
         .card-back {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #fc5c7d 100%);
             color: white;
             transform: rotateY(180deg);
+            box-shadow: 0 15px 40px rgba(240, 147, 251, 0.5);
         }
 
         .card-text {
@@ -176,20 +216,26 @@
         }
 
         .control-btn {
-            padding: 12px 25px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 8px;
-            background: #667eea;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            font-size: 1em;
+            font-size: 1.05em;
             cursor: pointer;
             transition: all 0.3s;
-            font-weight: 600;
+            font-weight: 700;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
         .control-btn:hover {
-            background: #764ba2;
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .control-btn:active {
+            transform: translateY(-1px);
         }
 
         .progress {
